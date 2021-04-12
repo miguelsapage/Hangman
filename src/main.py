@@ -11,7 +11,6 @@ from hang import Hang
 def main():
 	choose_word = Word()
 	word = choose_word.getWord()
-	print(word)
 
 	win = GraphWin('Hangman', 600, 300)
 
@@ -29,7 +28,10 @@ def main():
 			continue
 		all_letters.append(letter)
 		errors = hang.draw_hangman(win, letter, word)
-		end = hang.end_game(errors)
+
+		complete = all(i in all_letters for i in word)
+
+		end = hang.end_game(errors, complete)
 
 	win.close()
 
