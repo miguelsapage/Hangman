@@ -7,14 +7,21 @@ Author: Miguel Sapage
 from graphics import *
 from word import Word
 from hang import Hang
+from display import Format
 
 def main():
 	choose_word = Word()
 	word = choose_word.getWord()
+	words_without_spaces = list(word)
+	for i in word:
+		if i == 'space':
+			words_without_spaces.remove(i)
 
 	win = GraphWin('Hangman', 600, 300)
 
 	hang = Hang(win)
+	slots_display = Format(word, win)
+	letter_slots = slots_display.position_letters(150)
 	end = hang.end_game()
 
 	all_letters = []
@@ -27,9 +34,9 @@ def main():
 			print('You already tried that letter')
 			continue
 		all_letters.append(letter)
-		errors = hang.draw_hangman(win, letter, word)
+		errors = hang.draw_hangman(win, letter, words_without_spaces)
 
-		complete = all(i in all_letters for i in word)
+		complete = all(i in all_letters for i in words_without_spaces)
 
 		end = hang.end_game(errors, complete)
 

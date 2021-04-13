@@ -2,15 +2,17 @@ from graphics import *
 
 class Hang:
 	def __init__(self, win):
-		Line(Point(25, 100), Point(25, 200)).draw(win) #Main pole
-		Line(Point(25, 100), Point(75, 100)).draw(win)
-		Line(Point(75, 100), Point(75, 110)).draw(win) #Rope
-		Line(Point(10, 200), Point(40, 200)).draw(win) #Base
+		self.win = win
+
+		Line(Point(25, 100), Point(25, 200)).draw(self.win) #Main pole
+		Line(Point(25, 100), Point(75, 100)).draw(self.win)
+		Line(Point(75, 100), Point(75, 110)).draw(self.win) #Rope
+		Line(Point(10, 200), Point(40, 200)).draw(self.win) #Base
 
 		self.errors = 0
 
-	def check_letter(self, letter, word):
-		if letter in word:
+	def check_letter(self, letter, word_without_spaces):
+		if letter in word_without_spaces:
 			return True
 		else:
 			return False
@@ -31,11 +33,11 @@ class Hang:
 		man.append(left_leg)
 		return man
 
-	def draw_hangman(self, win, letter, word):
-		check = self.check_letter(letter, word)
+	def draw_hangman(self, letter, word_without_spaces):
+		check = self.check_letter(letter, word_without_spaces)
 		man = self.hangman_parts()
 		if check == False:
-			man[self.errors].draw(win)
+			man[self.errors].draw(self.win)
 			self.errors += 1
 		return self.errors
 
