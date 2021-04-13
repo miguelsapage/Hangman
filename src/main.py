@@ -8,6 +8,7 @@ from graphics import *
 from word import Word
 from hang import Hang
 from display import Format, Letters
+from end import End
 
 def main():
 	choose_word = Word()
@@ -44,6 +45,18 @@ def main():
 		complete = all(i in all_letters for i in words_without_spaces)
 
 		end = hang.end_game(errors, complete)
+
+	quit_button = End(win, 570, 280, 40, 20, 'Quit')
+	restart_button = End(win, 515, 280, 60, 20, 'Restart')
+
+	while True:
+		click = win.getMouse()
+		if quit_button.interact(click):
+			break
+		elif restart_button.interact(click):
+			win.close()
+			main()
+			break
 
 	win.close()
 
