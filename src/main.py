@@ -7,7 +7,7 @@ Author: Miguel Sapage
 from graphics import *
 from word import Word
 from hang import Hang
-from display import Format
+from display import Format, Letters
 
 def main():
 	choose_word = Word()
@@ -21,8 +21,11 @@ def main():
 
 	hang = Hang(win)
 	slots_display = Format(word, win)
-	letter_slots = slots_display.position_letters(150)
+	letters_slots = slots_display.position_letters(150)
+
 	end = hang.end_game()
+
+	letters_class = Letters(win, letters_slots, words_without_spaces)
 
 	all_letters = []
 
@@ -34,7 +37,9 @@ def main():
 			print('You already tried that letter')
 			continue
 		all_letters.append(letter)
-		errors = hang.draw_hangman(win, letter, words_without_spaces)
+		errors = hang.draw_hangman(letter, words_without_spaces)
+
+		letters_class.display_letter(letter)
 
 		complete = all(i in all_letters for i in words_without_spaces)
 

@@ -11,7 +11,7 @@ class Format:
 
 	def make_lines(self):
 		self.phrase = self.split_words()
-		if len(self.phrase) > 7:
+		if len(self.phrase) > 6:
 			lines = 2
 		else:
 			lines = 1
@@ -32,24 +32,43 @@ class Format:
 	def position_letters(self, x_coord):
 		self.position_lines()
 		x = x_coord
-		letters_coords = []
+		letters_slots = []
 		for i in self.phrase:
 			if self.lines == 2:
 				for j in self.phrase[self.phrase.index(i)]:
 					if self.phrase.index(i) < len(self.phrase) / 2:
 						Line(Point(x, self.lines_coords[0]), Point(x + 10, self.lines_coords[0])).draw(self.win)
-						letters_coords.append(Point(x + 5, self.lines_coords[0] - 10))
+						letters_slots.append(Point(x + 5, self.lines_coords[0] - 10))
 						x += 15
 					else:
 						Line(Point(x, self.lines_coords[1]), Point(x + 10, self.lines_coords[1])).draw(self.win)
-						letters_coords.append(Point(x + 5, self.lines_coords[1] - 10))
+						letters_slots.append(Point(x + 5, self.lines_coords[1] - 10))
 						x += 15
 				if self.phrase.index(i) == len(self.phrase) / 2 - 1 or self.phrase.index(i) == len(self.phrase) / 2 - 0.5:
 					x = x_coord
 			elif self.lines == 1:
 				for j in self.phrase[self.phrase.index(i)]:
 					Line(Point(x, self.lines_coords[0]), Point(x + 10, self.lines_coords[0])).draw(self.win)
-					letters_coords.append(Point(x + 5, self.lines_coords[0] - 10))
+					letters_slots.append(Point(x + 5, self.lines_coords[0] - 10))
 					x += 15
 			x += 15
-		return letters_coords
+		return letters_slots
+
+class Letters:
+	def __init__(self, win, letters_slots, words_without_spaces):
+		self.win = win
+		self.letters_slots = letters_slots
+		self.words_without_spaces =words_without_spaces
+
+	def positions_to_display(self, letter):
+		index_list = []
+		if letter in self.words_without_spaces:
+			for i in range(len(self.words_without_spaces)):
+				if self.words_without_spaces[i] == letter:
+					index_list.append(i)
+		return index_list
+
+	def display_letter(self, letter):
+		index_list = self.positions_to_display(letter)
+		for i in index_list:
+			Text(self.letters_slots[i], letter.upper()).draw(self.win)
