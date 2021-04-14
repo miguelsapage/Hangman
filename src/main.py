@@ -46,6 +46,11 @@ def main():
 
 		end = hang.end_game(errors, complete)
 
+	if complete == True:
+		Text(Point(325, 40), 'You got it! Amazing!').draw(win)
+	elif complete == False:
+		Text(Point(325, 40), 'You lost...try again').draw(win)
+
 	quit_button = End(win, 570, 280, 40, 20, 'Quit')
 	restart_button = End(win, 515, 280, 60, 20, 'Restart')
 
