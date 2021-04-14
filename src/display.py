@@ -58,7 +58,7 @@ class Letters:
 	def __init__(self, win, letters_slots, words_without_spaces):
 		self.win = win
 		self.letters_slots = letters_slots
-		self.words_without_spaces =words_without_spaces
+		self.words_without_spaces = words_without_spaces
 
 	def positions_to_display(self, letter):
 		index_list = []
@@ -72,3 +72,13 @@ class Letters:
 		index_list = self.positions_to_display(letter)
 		for i in index_list:
 			Text(self.letters_slots[i], letter.upper()).draw(self.win)
+
+class Lost:
+	def __init__(self, win, letters_slots, words_without_spaces):
+		self.win = win
+		self.letters_slots = letters_slots
+		self.words_without_spaces = words_without_spaces
+
+	def display_result(self):
+		for i in range(len(self.words_without_spaces)):
+			Text(self.letters_slots[i], self.words_without_spaces[i].upper()).draw(self.win)

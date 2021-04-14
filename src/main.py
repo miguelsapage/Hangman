@@ -7,7 +7,7 @@ Author: Miguel Sapage
 from graphics import *
 from word import Word
 from hang import Hang
-from display import Format, Letters
+from display import *
 from end import End
 
 def main():
@@ -49,6 +49,8 @@ def main():
 	if complete == True:
 		Text(Point(325, 40), 'You got it! Amazing!').draw(win)
 	elif complete == False:
+		lost = Lost(win, letters_slots, words_without_spaces)
+		lost.display_result()
 		Text(Point(325, 40), 'You lost...try again').draw(win)
 
 	quit_button = End(win, 570, 280, 40, 20, 'Quit')
