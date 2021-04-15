@@ -19,6 +19,8 @@ class Word:
 				self.encrypt()
 				word.append(letter.lower())
 			elif letter == 'BackSpace':
+				if len(word) == 0:
+					continue
 				self.undraw_last()
 				del word[-1]
 		return word
