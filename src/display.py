@@ -45,7 +45,7 @@ class Format:
 						letters_slots.append(Point(x + 5, self.lines_coords[1] - 10))
 						x += 15
 				if self.phrase.index(i) == len(self.phrase) / 2 - 1 or self.phrase.index(i) == len(self.phrase) / 2 - 0.5:
-					x = x_coord
+					x = x_coord - 15
 			elif self.lines == 1:
 				for j in self.phrase[self.phrase.index(i)]:
 					Line(Point(x, self.lines_coords[0]), Point(x + 10, self.lines_coords[0])).draw(self.win)
